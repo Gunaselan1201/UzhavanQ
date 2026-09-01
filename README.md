@@ -10,9 +10,19 @@ Real-time slot booking & queue management for government produce procurement cen
 
 ## 🔗 Live Demo
 
-- Frontend: `[add Vercel URL here after deployment]`
-- Backend API: `[add Render URL here after deployment]`
-- Admin panel: `[same frontend URL]/admin/login`
+- Frontend: https://uzhavanq.vercel.app
+- Backend API: https://uzhavanq.onrender.com
+- Admin panel: https://uzhavanq.vercel.app/admin/login
+
+## 🔑 Try it yourself
+
+**Farmer side:** Use any 10-digit phone number → OTP: `****`
+
+**Admin side:** `/admin/login`
+Username: admin1
+Password: TN1234
+Centre: Namakkal - Co operative
+*(Demo account — not a production credential)*
 
 ## 📋 Problem Statement — SIH 2026, PS 26032
 
