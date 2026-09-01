@@ -1,0 +1,144 @@
+.langpage {
+    background: #F6FDEC;
+    font-family: 'Noto Sans', 'Noto Sans Tamil', system-ui, sans-serif;
+}
+
+.langpage-shell {
+    width: 100%;
+    max-width: 402px;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 40px 24px 34px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.langpage-brand {
+    margin-top: 14%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.langpage-emblem {
+    width: 130px;
+    height: 130px;
+    object-fit: contain;
+}
+
+.langpage-title {
+    margin: 34px 0 0;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: #111511;
+    text-wrap: pretty;
+}
+
+.langpage-subtitle {
+    margin: 8px 0 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: #1a1a1a;
+}
+
+.langpage-spacer {
+    flex: 1;
+    min-height: 40px;
+}
+
+.langpage-actions {
+    width: 64%;
+    max-width: 210px;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+.lang-btn {
+    height: 52px;
+    flex: none;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 19px;
+    font-weight: 700;
+    cursor: pointer;
+    box-sizing: border-box;
+    background: transparent;
+    border: 1.5px solid #8CC45F;
+    color: #3F9016;
+    transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.lang-btn:hover {
+    background: #EEF8E2;
+}
+
+.lang-btn--selected {
+    background: #62AD2C;
+    border-color: #62AD2C;
+    color: #FFFFFF;
+}
+
+.lang-btn--selected:hover {
+    background: #558F26;
+    border-color: #558F26;
+}
+
+/* No desktop treatment before — this is the very first screen a fresh
+   visitor (no session yet) lands on, so it was the most visible instance
+   of the "narrow mobile column floating in a huge empty viewport" pattern. */
+@media (min-width: 900px) {
+    .langpage-shell {
+        max-width: 480px;
+    }
+
+    .langpage-emblem {
+        width: 160px;
+        height: 160px;
+    }
+
+    .langpage-title {
+        font-size: 32px;
+    }
+
+    .langpage-subtitle {
+        font-size: 18px;
+    }
+
+    .langpage-actions {
+        width: 100%;
+        max-width: 260px;
+    }
+
+    .lang-btn {
+        height: 56px;
+        font-size: 20px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .langpage-shell {
+        max-width: 560px;
+    }
+
+    .langpage-emblem {
+        width: 190px;
+        height: 190px;
+    }
+
+    .langpage-title {
+        font-size: 38px;
+    }
+
+    .langpage-actions {
+        max-width: 300px;
+    }
+
+    .lang-btn {
+        height: 60px;
+        font-size: 21px;
+    }
+}

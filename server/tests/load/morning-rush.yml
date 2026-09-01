@@ -1,0 +1,50 @@
+config:
+  target: "http://localhost:5001"
+  processor: "./processor.js"
+  phases:
+    # ramps 0 -> 50 new virtual users/sec over 20s, then holds ~80/sec for
+    # 20s (the "peak" window) -- mimics slots opening / a delay notification
+    # going out and a burst of farmers checking their phones at once.
+    - duration: 20
+      arrivalRate: 5
+      rampTo: 50
+      name: "ramp-up"
+    - duration: 20
+      arrivalRate: 80
+      name: "peak morning rush"
+  ensure:
+    p95: 800   # 95% of requests should complete under 800ms
+    p99: 1500  # 99% under 1.5s
+scenarios:
+  - name: "farmer checks availability then books"
+    weight: 100
+    flow:
+      - function: "setBookingPayload"
+      - get:
+          url: "/api/bookings/availability"
+          qs:
+            centre: "{{ centre }}"
+            date: "{{ dateOnly }}"
+          expect:
+            - statusCode: 200
+      # Not every farmer who checks availability actually books in the same
+      # session (some are just browsing) -- 70% follow through, like a real
+      # funnel, so the load isn't 100% write-heavy in a way no real traffic is.
+      - think: 0.2
+      - post:
+          url: "/api/bookings"
+          ifTrue: "{{ $randomNumber(1, 100) <= 70 }}"
+          json:
+            farmerName: "{{ farmerName }}"
+            phone: "{{ phone }}"
+            location: "{{ location }}"
+            produce: "{{ produce }}"
+            weight: "{{ weight }}"
+            centre: "{{ centre }}"
+            slotDateTime: "{{ slotDateTime }}"
+          expect:
+            # 201 (booked) and 409 (slot just filled -- correct, not a
+            # failure) are BOTH acceptable outcomes here; only a 4xx/5xx
+            # outside that set, or a dropped connection, counts as a real
+            # problem for Artillery's own pass/fail.
+            - statusCode: [201, 409]

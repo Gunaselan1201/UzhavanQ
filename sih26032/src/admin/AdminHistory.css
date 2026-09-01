@@ -1,0 +1,56 @@
+/* Additions specific to the History page — the page shell, table, and
+   activity-list base styles all come from AdminDashboard.css. */
+
+.admin-history-section {
+    background: #FFFFFF;
+    border: 1px solid var(--admin-border);
+    border-radius: var(--admin-radius);
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.admin-history-toolbar {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.admin-history-filters {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+}
+
+.admin-activity-list--full .admin-activity-item {
+    font-size: 16px;
+    padding: 8px 0;
+}
+
+.admin-activity-token {
+    font-family: var(--admin-font-mono);
+    font-weight: 700;
+}
+
+.admin-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.admin-pagination-status {
+    font-family: var(--admin-font-mono);
+    font-size: 16px;
+    color: var(--admin-text-muted);
+}
+
+@media (max-width: 768px) {
+    .admin-history-toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

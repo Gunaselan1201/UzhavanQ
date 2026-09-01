@@ -1,0 +1,165 @@
+{
+  "common": {
+    "back": "Back",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "search": "Search",
+    "closeSearch": "Close search",
+    "loading": "Loading…",
+    "somethingWentWrong": "Something went wrong. Please try again."
+  },
+  "language": {
+    "govName": "Government of Tamil Nadu",
+    "department": "Department of Agriculture",
+    "selectLanguage": "Select Language"
+  },
+  "login": {
+    "mobileTitle": "Mobile number",
+    "mobileSubtitle": "We will send a 4-digit code by SMS",
+    "hintDefault": "10 digits, as on your registration",
+    "hintError": "Enter all 10 digits",
+    "hintSent": "Code sent",
+    "sendCode": "Send code",
+    "codeSent": "Code sent"
+  },
+  "otp": {
+    "stepLabel": "Step 2 of 2",
+    "title": "OTP verification",
+    "subtitle": "Enter the code sent to {{phone}}",
+    "wrongCode": "Wrong code. Please check and try again.",
+    "verified": "Verified",
+    "resendIn": "Resend in {{time}}",
+    "tapToResend": "Tap here to resend the code",
+    "verify": "Verify"
+  },
+  "otpNotification": {
+    "sender": "SMS · TN Agri Procurement",
+    "message": "Your OTP is {{code}}. Do not share this code with anyone."
+  },
+  "navbar": {
+    "title": "Homepage",
+    "searchPlaceholder": "Search produce"
+  },
+  "drawer": {
+    "account": "Account",
+    "home": "Home",
+    "issuedTokens": "Issued Tokens",
+    "paymentStatus": "Payment Status",
+    "language": "Language",
+    "helpSupport": "Help & Support",
+    "logout": "Logout"
+  },
+  "account": {
+    "title": "Account",
+    "phone": "Phone",
+    "taluk": "Taluk",
+    "district": "District",
+    "state": "State",
+    "note": "Contact your procurement centre if these details need to be corrected."
+  },
+  "homepage": {
+    "selectProduce": "Select Your Produce",
+    "yourSlotIn": "Your slot in",
+    "noProduceMatch": "No produce matches “{{query}}”"
+  },
+  "countdown": {
+    "days": "Days",
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "seconds": "Seconds"
+  },
+  "produce": {
+    "onion": "Onion",
+    "tomato": "Tomato",
+    "sugarcane": "Sugarcane",
+    "wheat": "Wheat",
+    "paddy": "Paddy",
+    "potato": "Potato",
+    "maize": "Maize",
+    "groundnut": "Groundnut",
+    "soybean": "Soybean",
+    "mustard": "Mustard",
+    "chana": "Chana",
+    "turmeric": "Turmeric",
+    "moong": "Moong",
+    "urad": "Urad",
+    "cotton": "Cotton"
+  },
+  "form": {
+    "name": "Name",
+    "phone": "Phone no.",
+    "produceType": "Produce type",
+    "weight": "Weight (in ton)",
+    "weightPlaceholder": "Enter weight in ton",
+    "location": "Location",
+    "locationPlaceholder": "Enter your location",
+    "next": "Next"
+  },
+  "slot": {
+    "centre": "Centre",
+    "selectCentre": "Select the centre near you",
+    "bookYourSlot": "Book your slot",
+    "date": "Date",
+    "clear": "Clear",
+    "next": "Next",
+    "book": "Book"
+  },
+  "datepicker": {
+    "selectDate": "Select the date",
+    "prevMonth": "Previous month",
+    "nextMonth": "Next month",
+    "weekdays": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+    "months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+    "windowNote": "Slots open for the next 3 days only"
+  },
+  "booked": {
+    "message": "Slot Booked",
+    "openingIn": "Opening your token in {{seconds}}s",
+    "viewToken": "View Token"
+  },
+  "token": {
+    "issuedTitle": "Issued Token",
+    "qrLabel": "QR CODE",
+    "tapForQr": "Tap for QR Code",
+    "tapForDetails": "Tap for token details",
+    "farmerName": "Farmer Name",
+    "location": "Location",
+    "produce": "Produce",
+    "weight": "Weight (ton)",
+    "status": "Status",
+    "statusConfirmed": "Confirmed",
+    "statusDelayed": "Delayed",
+    "statusPostponed": "Postponed",
+    "statusCompleted": "Completed",
+    "emptyTitle": "No issued token",
+    "emptyText": "You have not booked a slot yet. Book one and your token will appear here.",
+    "bookASlot": "Book a Slot"
+  },
+  "slotAlert": {
+    "title": "Update to your booking",
+    "delayed": "Your slot has been delayed by {{minutes}} minutes.",
+    "postponed": "Your slot has been postponed.",
+    "completed": "Your booking has been marked completed.",
+    "paymentProcessed": "Your payment has been processed.",
+    "close": "Close"
+  },
+  "centres": {
+    "namakkalCoop": { "name": "Namakkal - Co operative", "address": "Tiruchengode road, Namakkal" },
+    "salemRegulated": { "name": "Salem - Regulated Market", "address": "Ammapet, Salem" },
+    "erodeCoop": { "name": "Erode - Co operative", "address": "Perundurai road, Erode" },
+    "thanjavurRegulated": { "name": "Thanjavur - Regulated Market", "address": "Nanjikottai road, Thanjavur" }
+  },
+  "paymentStatus": {
+    "title": "Payment Status",
+    "comingSoon": "Coming soon",
+    "body": "Payment tracking for your procured produce will appear here once this feature is live."
+  },
+  "help": {
+    "title": "Help & Support",
+    "intro": "Facing an issue with booking a slot, your token, or payment status? Reach out to the Department of Agriculture support desk.",
+    "helpline": "Helpline",
+    "email": "Email",
+    "hours": "Working Hours",
+    "hoursValue": "Mon – Sat, 9:00 AM – 6:00 PM"
+  }
+}

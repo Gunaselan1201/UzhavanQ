@@ -1,0 +1,79 @@
+.slot-heading {
+    margin: 8px 0 0;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 20px;
+    color: #000000;
+}
+
+
+.slot-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px 24px;
+    max-width: 278px;
+    margin: 4px auto 0;
+}
+
+.slot-chip {
+    height: 58px;
+    border-radius: 11px;
+    border: 1px solid var(--color-border);
+    background: #ffffff;
+    font-family: var(--font-body);
+    font-size: 18px;
+    color: #000000;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.slot-chip--available {
+    border-color: #65ff8b;
+}
+
+.slot-chip--almost-full {
+    background: #ECB43C;
+    border-color: var(--color-border);
+    color: #ffffff;
+}
+
+.slot-chip--selected {
+    background: var(--color-primary);
+    border-color: var(--color-border);
+    color: #ffffff;
+}
+
+.slot-chip--disabled {
+    border-color: var(--color-border);
+    color: var(--color-border);
+    cursor: not-allowed;
+}
+
+.form-btn-primary:disabled {
+    background: #b6dcc0;
+    cursor: not-allowed;
+}
+
+.slot-submit-error {
+    margin: 10px 0 0;
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--color-error);
+    text-align: center;
+}
+
+/* The grid was hard-locked to 2 columns / 278px regardless of viewport —
+   at 900px+ (the wider .form-card from formshell.css) there's room for
+   3 columns without the chips feeling cramped or tiny. */
+@media (min-width: 900px) {
+    .slot-grid {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 100%;
+        gap: 16px 18px;
+    }
+
+    .slot-chip {
+        height: 62px;
+        font-size: 17px;
+    }
+}

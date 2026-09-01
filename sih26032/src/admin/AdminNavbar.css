@@ -1,0 +1,133 @@
+.admin-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: #6BAE23;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.admin-navbar-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    height: 72px;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.admin-navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+    flex: none;
+}
+
+.admin-navbar-logo {
+    height: 60px;
+    width: auto;
+    flex: none;
+    border-radius: 4px;
+}
+
+.admin-navbar-titles {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.admin-navbar-kicker {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: rgba(255, 255, 255, 0.65);
+    text-transform: uppercase;
+}
+
+.admin-navbar-centre {
+    font-family: var(--font-heading);
+    font-size: 16px;
+    font-weight: 600;
+    color: #FFFFFF;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Plain inline nav — same navbar-inline-link treatment as the farmer
+   homepage's desktop nav (see src/homepage.css) instead of a hamburger +
+   off-canvas drawer. */
+.admin-navbar-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    flex: 1;
+    min-width: 0;
+    margin-left: 300px;
+}
+
+.admin-navbar-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    height: 38px;
+    padding: 0 14px;
+    border: none;
+    background: transparent;
+    border-radius: 20px;
+    font-family: 'Inclusive Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 550;
+    white-space: nowrap;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.admin-navbar-link:hover {
+    background-color: #7bbb35;
+}
+
+.admin-navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex: none;
+}
+
+.admin-navbar-divider {
+    width: 1px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.admin-navbar-logout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    height: 38px;
+    padding: 0 14px;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    font-family: 'Inclusive Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 550;
+    white-space: nowrap;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.admin-navbar-logout:hover {
+    color: white;
+    background-color: rgb(255, 57, 57);
+    border-color: white;
+}
+
+

@@ -1,0 +1,79 @@
+.placeholder-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 4px;
+    padding-bottom: 12%;
+}
+
+.placeholder-body--left {
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: left;
+    padding-bottom: 0;
+}
+
+.placeholder-title {
+    margin: 14px 0 0;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 21px;
+    color: #1a1a1a;
+}
+
+.placeholder-text {
+    margin: 6px 0 0;
+    max-width: 300px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.5;
+    color: #5A5656;
+}
+
+.contact-card {
+    width: 100%;
+    margin-top: 24px;
+    padding: 6px 20px;
+    background: #ffffff;
+    border: 1px solid var(--color-border-soft);
+    border-radius: 12px;
+    box-sizing: border-box;
+}
+
+.contact-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 16px 0;
+}
+
+.contact-row + .contact-row {
+    border-top: 1px solid #EFF3E9;
+}
+
+.contact-label {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 15px;
+    color: #1a1a1a;
+}
+
+.contact-value {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--color-primary);
+    text-decoration: none;
+    text-align: right;
+}
+
+a.contact-value:hover {
+    text-decoration: underline;
+}
+
+span.contact-value {
+    color: #5A5656;
+}

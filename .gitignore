@@ -1,0 +1,16 @@
+# Backup of the two nested-repo git histories that used to live inside
+# sih26032/ and server/ before this repo was created — see the initial
+# commit message. Not part of the app; kept on disk only as a recovery net.
+.old-git-history/
+
+# Design-canvas mockups — kept on disk for reference, not part of the app
+design/
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Just in case anything gets installed at the root
+node_modules/

@@ -1,0 +1,50 @@
+.account-avatar {
+    width: 68px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    border-radius: 50%;
+    background: #EAF5EC;
+    color: var(--color-primary-dark);
+}
+
+.account-name {
+    align-self: center;
+    margin: 12px 0 0;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 19px;
+    color: #1a1a1a;
+}
+
+/* The rest of this page is left-aligned (.placeholder-body--left), but the
+   footnote reads better centered under the contact card at every width. */
+.placeholder-body--left .placeholder-text {
+    align-self: center;
+    text-align: center;
+}
+
+.account-logout-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    margin-top: 8px;
+    padding: 14px;
+    box-sizing: border-box;
+    border: 1px solid #f3d4d0;
+    border-radius: 10px;
+    background: #fdf2f1;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-error);
+    cursor: pointer;
+}
+
+.account-logout-btn:hover {
+    background: #fbe4e1;
+}

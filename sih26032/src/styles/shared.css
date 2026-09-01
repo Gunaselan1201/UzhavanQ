@@ -1,0 +1,196 @@
+/* Shared design tokens — consolidates values that were previously typed as
+   literals in multiple page-level .css files (see the Part 1 CSS audit).
+   Each variable's value was chosen to exactly match what was already the
+   most common value for that role across the project; no value was changed,
+   only centralized. Every file below still controls its own layout/sizing —
+   this only removes copy-pasted colors and font stacks. */
+
+:root {
+    /* brand green — the app's one recurring accent, used identically as
+       "primary action" fill + hover across formshell/bookedpage/tokenpage,
+       and as a status/accent color in homepage, datepicker, languagesettingspage,
+       accountpage, admin dashboard, and admin login */
+    --color-primary: #28A745;
+    --color-primary-hover: #21913a;
+    --color-primary-dark: #1F5C2E;
+
+    /* error red — used identically across login/slot/token/account/admin */
+    --color-error: #C0392B;
+
+    /* neutral border grey — form inputs, cards, dividers */
+    --color-border: #cecece;
+    /* a second, softer card border used identically by lang-list and
+       contact-card — distinct from --color-border, not a typo of it */
+    --color-border-soft: #E0E8D6;
+
+    /* font stacks repeated as literal strings in 7+ files each */
+    --font-body: 'Inter', sans-serif;
+    --font-heading: 'Poppins', sans-serif;
+}
+
+/* ── off-canvas drawer ──
+   Was copy-pasted wholesale under two different class prefixes (the
+   farmer side-drawer in homepage.css and an admin-drawer-* clone in
+   AdminNavbar.css) — same component, same values, different names.
+   Consolidated here so both navbars reference one definition.
+
+   `color: inherit` bundled into this consolidation is a deliberate fix,
+   not a leftover: App.css sets a global `* { color: white }`, which
+   directly matches every element — the icon <svg> AND its <circle>/<path>
+   children individually, not just the svg as a whole — beating the dark
+   color they'd otherwise inherit from .drawer-link (a direct match always
+   wins over inheritance, regardless of specificity). Overriding just the
+   <svg> isn't enough; the `*` selector still matches its children too, so
+   this needs the descendant selector as well. Without it the icons render
+   invisible (white-on-white); that was already true for the farmer drawer
+   before this refactor and is fixed here rather than carried forward. */
+.drawer-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0);
+    pointer-events: none;
+    z-index: 1500;
+    transition: background 0.25s ease;
+}
+
+.drawer-overlay-visible {
+    background: rgba(0, 0, 0, 0.4);
+    pointer-events: auto;
+}
+
+.side-drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 78%;
+    max-width: 300px;
+    background: #ffffff;
+    box-sizing: border-box;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: 2px 0 16px rgba(0, 0, 0, 0.15);
+    transform: translateX(-100%);
+    transition: transform 0.28s ease;
+    z-index: 2000;
+}
+
+.side-drawer-open {
+    transform: translateX(0);
+}
+
+.drawer-close-btn {
+    align-self: flex-end;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    margin-bottom: 12px;
+}
+
+.drawer-close-btn:hover {
+    background-color: #f2f2f2;
+}
+
+.drawer-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.drawer-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 12px 8px;
+    box-sizing: border-box;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    text-decoration: none;
+    border-radius: 8px;
+    text-align: left;
+    cursor: pointer;
+}
+
+.drawer-link svg {
+    flex: none;
+}
+
+.drawer-link svg,
+.drawer-link svg * {
+    color: inherit;
+}
+
+.drawer-link:hover:not(:disabled) {
+    background-color: #f2f2f2;
+}
+
+.drawer-link:disabled {
+    color: #b0b0b0;
+    cursor: not-allowed;
+}
+
+.drawer-logout-btn {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 14px 8px;
+    border: none;
+    border-top: 1px solid #eee;
+    background: transparent;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-error);
+    text-align: left;
+    cursor: pointer;
+}
+
+.drawer-logout-btn:hover {
+    background-color: #fdf2f1;
+}
+
+/* ── page outer wrapper ──
+   login-page, langpage, token-page, and booked-page each retyped this
+   exact trio (min-height:100vh, display:flex, box-sizing:border-box) plus
+   one of two equivalent centering styles: `flex-direction:column;
+   align-items:center` or `justify-content:center`. Both center a single
+   full-height child horizontally — identical result, so this consolidates
+   to one. Each page still sets its own background color and the shell's
+   own max-width/padding — only the wrapper mechanics are shared.
+   (.pageshell in pageshell.css already covers this role for its own
+   4 pages via a real shared component, so it's intentionally not part
+   of this class — it needs two stacked children, not one centered one.) */
+.page-shell-outer {
+    min-height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+}
+
+/* ── icon-only button reset ──
+   .navbar-icon-btn, .pageshell-back-btn, .form-back-btn, .token-back-btn,
+   .login-back-btn, and .drawer-close-btn each retyped this exact block.
+   `border` is intentionally NOT here — .login-back-btn shows a real
+   border (a circular outline), so each page still declares its own
+   border: none (or a real one) rather than this silently overriding it
+   via cascade order. Every other property here was byte-identical across
+   all six with no exceptions. Width/height/border-radius/position/hover
+   stay page-specific since those genuinely differ per button. */
+.icon-btn-reset {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+}

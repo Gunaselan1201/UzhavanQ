@@ -1,0 +1,120 @@
+.admin-auth-page {
+    min-width: 1024px;
+    width: 100%;
+    min-height: 100vh;
+    background: #6bae23;
+    text-align: left;
+}
+
+/* See the matching comment in AdminDashboard.css — restores normal color
+   inheritance against App.css's global `* { color: white }`. */
+.admin-auth-page * {
+    color: inherit;
+}
+
+.admin-auth-panel {
+    display: flex;
+    min-height: 100vh;
+}
+
+.admin-auth-left {
+    flex: 0 0 41.5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+.admin-auth-logo {
+    width: 130px;
+    height: 130px;
+    object-fit: contain;
+    margin-bottom: 16px;
+}
+
+.admin-auth-heading {
+    font-size: 30px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+    text-align: center;
+}
+
+.admin-auth-subheading {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0;
+    text-align: center;
+}
+
+.admin-auth-right {
+    flex: 1;
+    background: #f9fff2;
+    border-radius: 48px 0 0 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
+    padding: 40px 100px;
+    box-sizing: border-box;
+}
+
+.admin-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 480px;
+}
+
+.admin-field-label {
+    font-size: 17px;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.admin-input {
+    height: 50px;
+    padding: 0 18px;
+    border: 1px solid #1a1a1a;
+    border-radius: 12px;
+    font-size: 16px;
+    color: #1a1a1a;
+    background: #f9fff2;
+}
+
+.admin-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+.admin-auth-error {
+    max-width: 480px;
+    margin: 0;
+    font-size: 13px;
+    color: var(--color-error);
+    background: rgba(192, 57, 43, 0.08);
+    border-radius: 6px;
+    padding: 8px 10px;
+}
+
+.admin-auth-submit {
+    max-width: 480px;
+    height: 48px;
+    border-radius: 12px;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    background: #6bae23;
+    color: #ffffff;
+    margin-top: 8px;
+}
+
+.admin-auth-submit:disabled {
+    background: #a9cf85;
+    cursor: not-allowed;
+}

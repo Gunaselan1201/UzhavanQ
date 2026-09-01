@@ -1,0 +1,50 @@
+.lang-list {
+    width: 100%;
+    margin-top: 8px;
+    background: #ffffff;
+    border: 1px solid var(--color-border-soft);
+    border-radius: 12px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.lang-list-row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 16px 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: #1a1a1a;
+    text-align: left;
+    box-sizing: border-box;
+}
+
+.lang-list-row:hover {
+    background: #F6FAF0;
+}
+
+.lang-list-row + .lang-list-row {
+    border-top: 1px solid #EFF3E9;
+}
+
+.lang-list-row[aria-pressed="true"] {
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+.lang-list-label {
+    flex: 1;
+    /* App.css sets a global `* { color: white }` for farmer-facing pages,
+       which directly matches this span and beats the dark color inherited
+       from .lang-list-row (a direct match always wins over inheritance,
+       regardless of specificity) — without this, the label is invisible
+       white-on-white. `inherit` tracks .lang-list-row's color, including
+       its green aria-pressed state, instead of hardcoding one shade. */
+    color: inherit;
+}

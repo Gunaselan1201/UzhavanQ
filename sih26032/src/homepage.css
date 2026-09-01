@@ -1,0 +1,658 @@
+.navbar {
+    position: fixed;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    width: calc(100% - 32px);
+    max-width: 393px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8px;
+    box-sizing: border-box;
+    background-color: #F8FFF0;
+    /* border: 0.5px solid #cecece; */
+    transition: box-shadow 0.2s ease;
+    border-radius: 50px;
+}
+
+.navbar-scrolled {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    background-color: #F8FFF0;
+}
+
+.navbar-title {
+    font-family: 'Inclusive Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #000000;
+    text-align: center;
+}
+
+.navbar-icon-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+}
+
+.navbar-icon-btn:hover {
+    background-color: #f2f2f2;
+}
+
+.navbar-inline-nav {
+    display: none;
+}
+
+.navbar-search-input {
+    flex: 1;
+    min-width: 0;
+    height: 34px;
+    margin-left: 12px;
+    padding: 0 4px;
+    border: none;
+    border-bottom: 1px solid var(--color-border);
+    border-radius: 0;
+    background: transparent;
+    font-family: 'Inclusive Sans', sans-serif;
+    font-size: 15px;
+    color: #000000;
+    outline: none;
+}
+
+.navbar-search-input::placeholder {
+    color: #9a9a9a;
+}
+
+.navbar-search-input:focus {
+    border-bottom-color: #6BAE23;
+}
+
+/* hide the native "search" clear affordance — the icon button handles closing */
+.navbar-search-input::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+/* .drawer-overlay, .side-drawer, .drawer-close-btn, .drawer-nav,
+   .drawer-link, .drawer-logout-btn now live in src/styles/shared.css —
+   this component is also used by AdminNavbar.jsx. */
+
+.homepage {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 84px 16px 32px;
+    box-sizing: border-box;
+    background-color: #F8FFF0;
+    min-height: 100vh;
+}
+
+/* ── landing animation ── */
+@keyframes page-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes page-rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: none; }
+}
+
+/* keeps translateX(-50%) — the navbar is centred by transform */
+@keyframes navbar-drop {
+    from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+    to { opacity: 1; transform: translateX(-50%); }
+}
+
+.navbar {
+    animation: navbar-drop 380ms ease-out both;
+}
+
+.homepage .hero {
+    animation: page-fade 460ms ease-out both;
+}
+
+.homepage .produce-list,
+.homepage .produce-empty {
+    animation: page-rise 460ms ease-out 90ms both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .navbar,
+    .homepage .hero,
+    .homepage .produce-list,
+    .homepage .produce-empty {
+        animation: none;
+    }
+}
+
+.hero {
+    position: relative;
+    width: calc(100% + 32px);
+    height: 202px;
+    background: #D9D9D9;
+    overflow: hidden;
+    margin-left: -16px;
+    margin-right: 16px;
+}
+
+.hero-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.hero-logo {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.hero-title-wrap {
+    position: absolute;
+    left: 50%;
+    bottom: 14px;
+    transform: translateX(-50%);
+    width: 277px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 12px;
+    box-sizing: border-box;
+}
+
+.hero-title-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.17;
+    background: #ffffff;
+    border-radius: 7px;
+}
+
+.hero-title {
+    position: relative;
+    margin: 0;
+    color: #ffffff;
+    font-family: var(--font-body);
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 36px;
+    letter-spacing: 2.5px;
+}
+
+/* Tamil translations run much longer than the English original, and the
+   badge is a fixed size — shrink the type and let it wrap onto two lines
+   instead of overflowing the badge. */
+:lang(ta) .hero-title-wrap {
+    width: 320px;
+    max-width: calc(100% - 32px);
+    height: auto;
+    min-height: 60px;
+    padding: 10px 16px;
+    justify-content: center;
+}
+
+:lang(ta) .hero-title {
+    font-size: 14px;
+    line-height: 1.35;
+    letter-spacing: 0.3px;
+    text-align: center;
+}
+
+/* ── booked state: countdown replaces the "Select Your Produce" plate ── */
+.hero-countdown-wrap {
+    position: absolute;
+    left: 50%;
+    bottom: 14px;
+    transform: translateX(-50%);
+    width: 277px;
+    max-width: calc(100% - 32px);
+    min-height: 87px;
+    padding: 9px 0 11px;
+    box-sizing: border-box;
+    border: none;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    cursor: pointer;
+}
+
+.hero-countdown-bg {
+    position: absolute;
+    inset: 0;
+    background: #ffffff;
+    opacity: 0.2;
+    border-radius: 7px;
+}
+
+.hero-slot-label {
+    position: relative;
+    font-family: 'Azeret Mono', monospace;
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 2;
+    color: #ffffff;
+}
+
+.cd-row {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+}
+
+.cd-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #ffffff;
+}
+
+.cd-number {
+    font-family: 'Azeret Mono', monospace;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+}
+
+.cd-label {
+    font-family: 'Azeret Mono', monospace;
+    font-weight: 600;
+    font-size: 8px;
+    line-height: 1.6;
+}
+
+.cd-sep {
+    width: 1px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.55);
+}
+
+.produce-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-top: 24px;
+}
+
+.produce-empty {
+    margin: 48px 0;
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: #5a5656;
+    text-align: center;
+}
+
+.produce-card {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    height: 174px;
+    border: none;
+    border-radius: 11px;
+    padding: 9px 0 0 8px;
+    box-sizing: border-box;
+    overflow: hidden;
+    cursor: pointer;
+    text-align: left;
+    background-repeat: no-repeat;
+}
+
+.produce-name {
+    position: relative;
+    z-index: 1;
+    color: #ffffff;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 36px;
+    letter-spacing: -1.1px;
+}
+
+/* Tamil produce names run longer than English and need more vertical
+   room per line — a smaller size keeps them inside the fixed-height card. */
+:lang(ta) .produce-name {
+    font-size: 26px;
+    line-height: 1.15;
+    letter-spacing: 0;
+}
+
+.produce-card--photo {
+    background-size: cover;
+    background-position: center;
+}
+
+/* Scrim keeps the white label legible over a full-bleed photo. */
+.produce-card--photo::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(100deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.25) 45%, rgba(0, 0, 0, 0) 75%);
+}
+
+/* Solid-colour cards, until a photograph is supplied. */
+.produce-card--plain::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(115deg, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0) 60%);
+}
+
+.produce-card--cutout {
+    background-size: auto 155px;
+    background-position: right 8px top 22px;
+}
+
+@media (min-width: 900px) {
+    .navbar {
+        max-width: 900px;
+        height: 68px;
+        padding: 0 20px 0 24px;
+        justify-content: flex-start;
+        gap: 20px;
+    }
+
+    .navbar-title {
+        font-size: 1.3rem;
+        flex: none;
+        white-space: nowrap;
+    }
+
+    .navbar-icon-btn {
+        width: 44px;
+        height: 44px;
+        flex: none;
+    }
+
+    .navbar-icon-btn svg {
+        width: 22px;
+        height: 22px;
+    }
+
+    /* A hamburger is a mobile pattern — at 900px+ the links are plain
+       inline nav instead of an off-canvas drawer. */
+    .navbar-menu-btn {
+        display: none;
+    }
+
+    .navbar-inline-nav {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        flex: 1;
+        margin-left: 530px;
+        min-width: 0;
+        /* A label's rendered width varies a lot between languages (Tamil
+           labels run far longer than English) — if the combined widths
+           ever exceed the pill's width, scroll horizontally inside the
+           bar rather than overflowing or wrapping it. */
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    .navbar-inline-nav::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Tamil labels run much longer than English, so the same fixed
+       margin-left would push them past the pill's right edge — a smaller
+       offset keeps the row centered under the same nav either way. */
+    :lang(ta) .navbar-inline-nav {
+        margin-left: 150px;
+    }
+
+    .navbar-inline-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: none;
+        height: 38px;
+        padding: 0 14px;
+        border: none;
+        background: transparent;
+        border-radius: 20px;
+        font-family: 'Inclusive Sans', sans-serif;
+        font-size: 14px;
+        font-weight: 550;
+        white-space: nowrap;
+        color: #000000;
+        cursor: pointer;
+    }
+
+    .navbar-inline-link:hover {
+        background-color: #f2f2f2;
+    }
+
+    /* the drawer/overlay are mobile-only now that the button opening
+       them is hidden — belt-and-braces in case menuOpen is ever true.
+       Scoped to farmer's .navbar sibling (not just .side-drawer /
+       .drawer-overlay alone) since AdminNavbar.jsx uses the same shared
+       drawer classes but must stay usable at every width — admin has no
+       inline-nav fallback to switch to at 900px+. */
+    .navbar ~ .side-drawer,
+    .navbar ~ .drawer-overlay {
+        display: none;
+    }
+
+    .homepage {
+        max-width: 1100px;
+        padding: 124px 48px 64px;
+    }
+
+    .hero {
+        width: 100%;
+        height: 360px;
+        margin-left: 0;
+        margin-right: 0;
+        border-radius: 24px;
+    }
+
+    .hero-logo {
+        top: 20px;
+        right: 20px;
+        width: 56px;
+        height: 56px;
+    }
+
+    .hero-title-wrap {
+        width: 360px;
+        height: 76px;
+    }
+
+    .hero-title-bg {
+        border-radius: 10px;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .produce-list {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+        margin-top: 40px;
+    }
+
+    .produce-card {
+        width: 100%;
+        height: 230px;
+        padding: 24px 0 0 28px;
+        border-radius: 24px;
+    }
+
+    .produce-name {
+        font-size: 1.6rem;
+    }
+
+    .produce-card--cutout {
+        background-size: auto 150px;
+        background-position: right 12px bottom 14px;
+    }
+}
+
+@media (min-width: 1440px) { 
+    .navbar {
+        max-width: 1600px;
+        height: 76px;
+        padding: 0 32px;
+    }
+
+    .navbar-title {
+        font-size: 1.4rem;
+    }
+
+    .navbar-icon-btn {
+        width: 48px;
+        height: 48px;
+    }
+
+    .navbar-icon-btn svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .homepage {
+        max-width: 1600px;
+        padding: 144px 80px 96px;
+    }
+
+    .hero {
+        height: 600px;
+        width: 100%;
+        border-radius: 0px;
+        margin-top: -50px;
+    }
+
+    .hero-logo {
+        top: 28px;
+        right: 28px;
+        width: 64px;
+        height: 64px;
+    }
+
+    .hero-title-wrap {
+        width: 420px;
+        height: 90px;
+    }
+
+    .hero-title-bg {
+        border-radius: 12px;
+    }
+
+    .hero-title {
+        font-size: 2.4rem;
+    }
+
+    .produce-list {
+        gap: 32px;
+        margin-top: 56px;
+    }
+
+    .produce-card {
+        height: 280px;
+        padding: 32px 0 0 32px;
+        border-radius: 28px;
+    }
+
+    .produce-name {
+        font-size: 1.9rem;
+    }
+
+    .produce-card--cutout {
+        background-size: auto 185px;
+        background-position: right 16px bottom 18px;
+    }
+}
+
+/* ── slot delay/postponement alert ──
+   Blocking modal shown the first time the farmer lands on the homepage
+   after their booking was delayed/postponed from the admin side (see
+   src/booking.js's hasSeenSlotUpdate/markSlotUpdateSeen). Sits above the
+   off-canvas drawer (z-index 2000 in shared.css), since it can appear
+   alongside it. */
+.slot-alert-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.slot-alert-card {
+    position: relative;
+    width: 100%;
+    max-width: 360px;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 90px 24px 60px;
+    box-sizing: border-box;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.slot-alert-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.slot-alert-close:hover {
+    background-color: #f2f2f2;
+}
+
+.slot-alert-title {
+    margin: 0 0 12px;
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #000000;
+}
+
+.slot-alert-message {
+    margin: 0 0 24px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #3a3a3a;
+}
+
+.slot-alert-dismiss {
+    width: 100%;
+    height: 48px;
+    border: none;
+    border-radius: 12px;
+    background: var(--color-primary);
+    color: #ffffff;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.slot-alert-dismiss:hover {
+    background: var(--color-primary-hover);
+}

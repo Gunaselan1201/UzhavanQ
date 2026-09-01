@@ -1,0 +1,48 @@
+.pageshell {
+    min-height: 100vh;
+    background: #F8FFF0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 38px 24px 40px;
+    box-sizing: border-box;
+}
+
+.pageshell > * {
+    width: 100%;
+    max-width: 401px;
+}
+
+.pageshell-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: none;
+}
+
+.pageshell-back-btn {
+    width: 40px;
+    height: 40px;
+    flex: none;
+    border: none;
+    border-radius: 50%;
+}
+
+.pageshell-back-btn:hover {
+    background: #f2f2f2;
+}
+
+.pageshell-title {
+    margin: 0;
+    font-family: 'Inclusive Sans', sans-serif;
+    font-weight: 700;
+    font-size: 23px;
+    color: #000000;
+}
+
+.pageshell-body {
+    flex: 1;
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+}

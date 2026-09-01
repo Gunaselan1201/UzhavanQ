@@ -1,0 +1,861 @@
+/* ── Admin design tokens ──
+   Scoped to .admin-dashboard (the shared page-shell wrapper for every admin
+   page) so this palette never leaks into the farmer-facing shared.css
+   tokens. Radius is 8px everywhere; spacing sticks to {4,8,16,24,32}px. */
+.admin-dashboard {
+    /* Multi-color scheme — each action/purpose gets its own color instead
+       of one blanket accent: blue for navigation/info, green for
+       success/complete, amber for delay/warning, red for postpone/danger.
+       Status pills below reuse the same four hues for consistency. */
+    --admin-info: #2149E6;
+    --admin-info-hover: #1938BD;
+    --admin-info-soft: rgba(33, 73, 230, 0.12);
+    --admin-text: #14140F;
+    --admin-text-muted: #726F66;
+    --admin-text-faint: #D8D6CE;
+    --admin-border: #E4E2DB;
+    --admin-border-soft: #EFEEE9;
+    --admin-bg-subtle: #F7F7F5;
+    --admin-track-off: #E4E2DB;
+    --admin-confirmed: #1C8A4B;
+    --admin-confirmed-hover: #157A3E;
+    --admin-confirmed-bg: rgba(28, 138, 75, 0.10);
+    --admin-delayed: #B8790A;
+    --admin-delayed-bg: rgba(184, 121, 10, 0.12);
+    --admin-postponed: #B23B3B;
+    --admin-postponed-bg: rgba(178, 59, 59, 0.10);
+    --admin-completed: #14140F;
+    --admin-completed-bg: rgba(20, 20, 15, 0.08);
+    --admin-radius: 8px;
+    /* Same font stack as the farmer-facing pages (see src/styles/shared.css)
+       instead of a separate admin-only typeface — this alias just keeps
+       every existing var(--admin-font-mono) reference below working without
+       touching each one individually. */
+    --admin-font-mono: var(--font-body);
+
+    width: 100%;
+    min-height: 100vh;
+    background: #FFFFFF;
+    text-align: left;
+    font-family: var(--font-body);
+}
+
+/* :root's leftover template background (src/index.css) shows through
+   around .admin-dashboard on wide viewports / overscroll — admin pages
+   are white end to end, not the farmer pages' pale-green wash. */
+body:has(.admin-dashboard) {
+    background: #FFFFFF;
+}
+
+.admin-dashboard-body {
+    padding: 32px 32px 60px;
+    padding-bottom: 100px;
+    box-sizing: border-box;
+}
+
+/* Desktop is the primary target — a centre officer runs this on a laptop,
+   not a phone — so this max-width container is the default, unscaled
+   layout. The mobile fallback lives in the @media block at the bottom. */
+.admin-content {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+/* App.css sets a global `* { color: white }` for the farmer-facing pages.
+   A directly-matched rule always beats an inherited one regardless of
+   specificity, so any plain element in here would render white-on-white
+   unless something else directly matches it too — this restores normal
+   inheritance so each element's color comes from its own rule below.
+   :where() keeps this at zero specificity: it still beats App.css's bare
+   `*` (source order breaks that tie), but any single-class rule from here
+   or AdminNavbar.css — even one loaded earlier in the module graph — wins
+   deterministically instead of depending on import order. */
+:where(.admin-dashboard) * {
+    color: inherit;
+}
+
+.admin-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.admin-toolbar-title {
+    font-family: var(--font-heading);
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--admin-text);
+    letter-spacing: -0.01em;
+    margin: 0;
+}
+
+/* History / Trends pages render the page title as a bare direct child of
+   .admin-content (Dashboard's lives inside .admin-toolbar instead), so it
+   needs its own bottom margin here. */
+.admin-content > .admin-toolbar-title {
+    margin-bottom: 24px;
+}
+
+.admin-panel-title {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--admin-text-muted);
+    text-transform: uppercase;
+    margin: 0;
+    padding-bottom: 16px;
+}
+
+.admin-toolbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.admin-link-btn {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.admin-date-filter {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--admin-text-muted);
+}
+
+.admin-date-filter input {
+    height: 36px;
+    padding: 0 16px;
+    border: 1px solid var(--admin-border);
+    border-radius: var(--admin-radius);
+    font-family: var(--admin-font-mono);
+    font-size: 16px;
+    color: var(--admin-text);
+    background: #FFFFFF;
+}
+
+.admin-dashboard-error {
+    background: var(--admin-postponed-bg);
+    color: var(--admin-postponed);
+    padding: 8px 16px;
+    border-radius: var(--admin-radius);
+    font-size: 16px;
+    margin-bottom: 16px;
+}
+
+.admin-dashboard-status {
+    color: var(--admin-text-muted);
+    font-size: 16px;
+}
+
+/* ── stats row ── */
+.admin-stats-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 24px;
+    padding: 24px 0 32px;
+    border-bottom: 4px solid var(--admin-border);
+    border-top: 4px solid var(--admin-border);
+    margin-bottom: 24px;
+}
+
+.admin-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.admin-stat-value {
+    font-family: var(--admin-font-mono);
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--admin-text);
+    line-height: 1;
+}
+
+.admin-stat-value--delayed {
+    color: var(--admin-delayed);
+}
+
+.admin-stat-value--postponed {
+    color: var(--admin-postponed);
+}
+
+.admin-stat-label {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--admin-text-muted);
+    text-transform: uppercase;
+}
+
+/* ── Manage Slots panel ── */
+.admin-manage-slots {
+    background: #FFFFFF;
+    border: 1px solid var(--admin-border);
+    border-radius: var(--admin-radius);
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.admin-manage-slots-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.admin-day-closure {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 8px 0;
+    margin-bottom: 16px;
+}
+
+.admin-day-closure--closed {
+    background: var(--admin-postponed-bg);
+    color: var(--admin-postponed);
+    justify-content: space-between;
+    padding: 8px 16px;
+    border-radius: var(--admin-radius);
+    font-size: 16px;
+}
+
+.admin-day-reason-input {
+    flex: 1;
+    height: 40px;
+    padding: 0 16px;
+    border: 1px solid var(--admin-border);
+    border-radius: var(--admin-radius);
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: var(--admin-text);
+    background: #FFFFFF;
+}
+
+.admin-btn--danger {
+    border: 1px solid var(--admin-postponed);
+    color: var(--admin-postponed);
+    background: #FFFFFF;
+}
+
+.admin-slot-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0 0 16px;
+    padding: 0;
+    list-style: none;
+}
+
+.admin-slot-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    border-radius: var(--admin-radius);
+    background: #FFFFFF;
+    border: 1px solid var(--admin-border);
+}
+
+.admin-slot-row--closed {
+    background: rgba(178, 59, 59, 0.04);
+}
+
+.admin-slot-time {
+    font-family: var(--admin-font-mono);
+    font-weight: 600;
+    font-size: 16px;
+    width: 92px;
+    flex: none;
+    color: var(--admin-text);
+}
+
+.admin-slot-count {
+    font-size: 16px;
+    color: var(--admin-text-muted);
+    flex: 1;
+}
+
+.admin-slot-row--closed .admin-slot-count {
+    color: var(--admin-postponed);
+    font-weight: 500;
+}
+
+/* ── toggle switch (Manage Slots open/closed) ── */
+.admin-toggle {
+    width: 40px;
+    height: 22px;
+    border-radius: var(--admin-radius);
+    border: none;
+    background: var(--admin-track-off);
+    position: relative;
+    flex: none;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.15s ease;
+}
+
+.admin-toggle--on {
+    background: var(--admin-confirmed);
+}
+
+.admin-toggle:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.admin-toggle-knob {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    transition: left 0.15s ease;
+}
+
+.admin-toggle--on .admin-toggle-knob {
+    left: 20px;
+}
+
+/* ── Recent Activity widget ── */
+.admin-recent-activity {
+    background: #FFFFFF;
+    border: 1px solid var(--admin-border);
+    border-radius: var(--admin-radius);
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.admin-recent-activity-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.admin-view-full-link {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--admin-info);
+    text-decoration: none;
+}
+
+.admin-view-full-link:hover {
+    color: var(--admin-info-hover);
+}
+
+.admin-activity-list {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.admin-activity-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--admin-border-soft);
+    font-size: 16px;
+}
+
+.admin-activity-item:last-child {
+    border-bottom: none;
+}
+
+.admin-activity-detail {
+    color: var(--admin-text);
+}
+
+.admin-activity-meta {
+    color: var(--admin-text-muted);
+    font-size: 16px;
+    flex: none;
+    white-space: nowrap;
+}
+
+/* ── per-booking history row (in the main table) ── */
+.admin-history-row td {
+    background: var(--admin-bg-subtle);
+    white-space: normal;
+}
+
+.admin-history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.admin-history-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 16px;
+    padding: 4px 0;
+}
+
+.admin-history-action {
+    font-weight: 600;
+    color: var(--admin-info);
+    flex: none;
+    text-transform: capitalize;
+}
+
+.admin-history-detail {
+    flex: 1;
+    color: var(--admin-text);
+}
+
+.admin-history-meta {
+    color: var(--admin-text-muted);
+    flex: none;
+    white-space: nowrap;
+}
+
+.admin-bulk-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--admin-info-soft);
+    border: 1px solid rgba(33, 73, 230, 0.3);
+    border-radius: var(--admin-radius);
+    padding: 8px 16px;
+    margin-bottom: 16px;
+    position: relative;
+}
+
+.admin-bulk-count {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--admin-info);
+    margin-right: 4px;
+}
+
+.admin-bulk-clear {
+    margin-left: auto;
+    background: transparent;
+    border-color: transparent;
+}
+
+.admin-booking-checkbox-col {
+    width: 32px;
+    white-space: nowrap;
+}
+
+.admin-row-selected {
+    background: var(--admin-info-soft);
+}
+
+.admin-booking-table-wrap {
+    background: #FFFFFF;
+    border-radius: var(--admin-radius);
+    border: 1px solid var(--admin-border);
+    overflow-x: auto;
+}
+
+.admin-booking-table {
+    width: 100%;
+    /* width:100% is a ceiling, not a floor — if a row's content (e.g. the
+       icon-button Actions cell) needs more room than the container,
+       min-width wins over width, growing the table so the wrap's
+       overflow-x:auto can actually scroll instead of silently clipping the
+       last button off the edge. */
+    min-width: max-content;
+    border-collapse: collapse;
+    font-size: 16px;
+    color: var(--admin-text);
+}
+
+.admin-booking-table th,
+.admin-booking-table td {
+    padding: 16px;
+    text-align: left;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.admin-booking-table thead th {
+    background: var(--admin-bg-subtle);
+    font-weight: 600;
+    color: black;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+}
+
+.admin-booking-table tbody tr {
+    border-top: 1px solid var(--admin-border-soft);
+}
+
+.admin-booking-token {
+    font-family: var(--admin-font-mono);
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.admin-delay-tag {
+    color: var(--admin-delayed);
+    font-family: var(--admin-font-mono);
+    font-size: 16px;
+}
+
+.admin-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 600;
+    font-size: 16px;
+    width: fit-content;
+    padding: 4px 8px;
+    border-radius: var(--admin-radius);
+}
+
+.admin-status--confirmed {
+    color: var(--admin-confirmed);
+    background: var(--admin-confirmed-bg);
+}
+
+.admin-status--delayed {
+    color: var(--admin-delayed);
+    background: var(--admin-delayed-bg);
+}
+
+.admin-status--postponed {
+    color: var(--admin-postponed);
+    background: var(--admin-postponed-bg);
+}
+
+.admin-status--completed {
+    color: var(--admin-completed);
+    background: var(--admin-completed-bg);
+}
+
+.admin-booking-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    position: relative;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+}
+
+.admin-payment-paid {
+    font-family: var(--admin-font-mono);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--admin-confirmed);
+    padding: 0 8px;
+}
+
+/* Generic outlined button — toolbar actions, day closure, delay/bulk menu
+   trigger. Distinct from .admin-icon-btn (table action icons). */
+.admin-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 36px;
+    padding: 0 16px;
+    border: 1px solid var(--admin-border);
+    border-radius: var(--admin-radius);
+    background: #FFFFFF;
+    font-family: var(--admin-font-mono);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--admin-text);
+    cursor: pointer;
+}
+
+.admin-btn:hover:not(:disabled) {
+    background: var(--admin-bg-subtle);
+}
+
+.admin-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.admin-btn--active {
+    background: var(--admin-info-soft);
+    border-color: var(--admin-info);
+    color: var(--admin-info);
+}
+
+.admin-btn--primary {
+    background: var(--admin-confirmed);
+    border-color: var(--admin-confirmed);
+    color: #FFFFFF;
+}
+
+.admin-btn--primary:hover:not(:disabled) {
+    background: var(--admin-confirmed-hover);
+    border-color: var(--admin-confirmed-hover);
+}
+
+/* Outlined variants for the bulk-action toolbar — each action keeps its
+   own color instead of one blanket accent (delay=amber, postpone=danger
+   red, mark-arrived=info blue). */
+.admin-btn--warn {
+    border-color: var(--admin-delayed);
+    color: var(--admin-delayed);
+    background: #FFFFFF;
+}
+
+.admin-btn--info {
+    border-color: var(--admin-info);
+    color: var(--admin-info);
+    background: #FFFFFF;
+}
+
+/* Icon-only action buttons in the bookings table */
+.admin-icon-btn {
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: var(--admin-radius);
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--admin-text-muted);
+    cursor: pointer;
+    flex: none;
+    padding: 0;
+}
+
+.admin-icon-btn:hover:not(:disabled) {
+    background: var(--admin-bg-subtle);
+}
+
+/* Wins over the semantic color modifiers below regardless of source order —
+   a disabled action always reads as unavailable, never as "this is the
+   amber/red/green one". */
+.admin-icon-btn:disabled {
+    color: var(--admin-text-faint) !important;
+    cursor: not-allowed;
+}
+
+/* Per-action colors — Delay/Postpone/Complete/Payment each get their own
+   hue instead of sharing one accent, matching the status-pill palette. */
+.admin-icon-btn--delay {
+    color: var(--admin-delayed);
+}
+
+.admin-icon-btn--delay:hover:not(:disabled) {
+    background: var(--admin-delayed-bg);
+}
+
+.admin-icon-btn--postpone {
+    color: var(--admin-postponed);
+}
+
+.admin-icon-btn--postpone:hover:not(:disabled) {
+    background: var(--admin-postponed-bg);
+}
+
+.admin-icon-btn--complete {
+    color: var(--admin-confirmed);
+}
+
+.admin-icon-btn--complete:hover:not(:disabled) {
+    background: var(--admin-confirmed-bg);
+}
+
+.admin-icon-btn--payment {
+    color: var(--admin-info);
+}
+
+.admin-icon-btn--payment:hover:not(:disabled) {
+    background: var(--admin-info-soft);
+}
+
+/* "Open" indicator for the delay popover trigger / expanded history row —
+   layered on top of the button's own semantic color above. */
+.admin-icon-btn--active-warning {
+    background: var(--admin-delayed-bg);
+}
+
+.admin-icon-btn--active-info {
+    background: var(--admin-info-soft);
+    color: var(--admin-info);
+}
+
+.admin-delay-wrap {
+    position: relative;
+}
+
+/* Rendered through a portal into document.body (see AdminDashboard.jsx), so
+   it sits OUTSIDE the .admin-dashboard subtree — none of the --admin-*
+   custom properties (they're scoped to .admin-dashboard) or the
+   :where(.admin-dashboard) * { color: inherit } fix reach it. Left as
+   var()-free literals on purpose: a var() referencing an out-of-scope
+   custom property resolves to nothing, which made the whole `color`
+   declaration invalid and let App.css's global `* { color: white }` win —
+   white text on a white dropdown, i.e. invisible option labels. */
+.admin-delay-picker {
+    background: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(20, 20, 15, 0.18);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+    min-width: 148px;
+    padding: 8px;
+}
+
+/* Rendered through a portal into document.body (see AdminDashboard.jsx) so
+   the table's overflow-x:auto wrapper — and any other clipping ancestor —
+   can't cut it off. Position is computed in JS from the trigger button's
+   on-screen rect and applied as an inline style. */
+.admin-delay-picker--portal {
+    position: fixed;
+    z-index: 1000;
+}
+
+.admin-delay-option {
+    text-align: left;
+    padding: 8px 16px;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    color: #14140F;
+    cursor: pointer;
+}
+
+.admin-delay-option:hover {
+    background: #F7F7F5;
+}
+
+/* ── feedback toast ── */
+.admin-toast {
+    position: fixed;
+    right: 32px;
+    bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--admin-text);
+    color: #FFFFFF;
+    padding: 16px;
+    border-radius: var(--admin-radius);
+    box-shadow: 0 8px 24px rgba(20, 20, 15, 0.3);
+    font-size: 16px;
+    font-weight: 500;
+    z-index: 2000;
+}
+
+/* Secondary fallback — the desktop table above is the primary layout.
+   Below this width a staff member is on a phone, not a laptop at the
+   centre, so the table reflows into one stacked card per booking. */
+@media (max-width: 768px) {
+    .admin-dashboard-body {
+        padding: 20px 16px 40px;
+    }
+
+    .admin-toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .admin-stats-row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    .admin-booking-table-wrap {
+        overflow-x: visible;
+        border: none;
+        border-radius: 0;
+        background: transparent;
+    }
+
+    .admin-booking-table,
+    .admin-booking-table tbody,
+    .admin-booking-table tr,
+    .admin-booking-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .admin-booking-table thead {
+        display: none;
+    }
+
+    .admin-booking-table tbody tr {
+        border: 1px solid var(--admin-border);
+        border-radius: var(--admin-radius);
+        background: #FFFFFF;
+        margin-bottom: 16px;
+        padding: 4px 16px;
+    }
+
+    .admin-booking-table td {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 10px 0;
+        border-top: 1px solid var(--admin-border-soft);
+        text-align: right;
+    }
+
+    .admin-booking-table tr td:first-child {
+        border-top: none;
+    }
+
+    .admin-booking-table td::before {
+        content: attr(data-label);
+        flex: none;
+        font-weight: 600;
+        font-size: 16px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--admin-text-muted);
+        text-align: left;
+    }
+
+    .admin-booking-actions {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        white-space: normal;
+    }
+
+    .admin-booking-checkbox-col {
+        justify-content: flex-start;
+    }
+
+    .admin-bulk-toolbar {
+        flex-wrap: wrap;
+    }
+
+    .admin-toast {
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+    }
+}

@@ -1,0 +1,274 @@
+.login-page {
+    background: #F9FFF2;
+    font-family: 'Noto Sans', 'Noto Sans Tamil', 'Noto Sans Kannada', 'Noto Sans Malayalam', 'Noto Sans Telugu', system-ui, sans-serif;
+}
+
+.login-shell {
+    width: 100%;
+    max-width: 360px;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 18px 24px 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-topbar {
+    height: 38px;
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.login-back-btn {
+    width: 34px;
+    height: 34px;
+    flex: none;
+    border-radius: 50%;
+    border: 1.5px solid #D9E4CE;
+    color: #111511;
+}
+
+.login-back-btn:hover {
+    background: #F1F6EA;
+}
+
+.login-step {
+    font-size: 13px;
+    font-weight: 600;
+    color: #4A5548;
+}
+
+.login-brand {
+    display: flex;
+    justify-content: center;
+    margin-top: 22px;
+}
+
+.login-brand img {
+    width: 58px;
+    height: 58px;
+}
+
+.login-heading {
+    margin-top: 26px;
+}
+
+.login-title {
+    margin: 0;
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: #111511;
+    text-wrap: pretty;
+}
+
+.login-subtitle {
+    margin: 9px 0 0;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #5A6557;
+}
+
+.login-form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.phone-field {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 62px;
+    margin-top: 26px;
+    border-bottom: 2px solid #C4D2B8;
+}
+
+.phone-field--valid {
+    border-bottom-color: var(--color-primary-dark);
+}
+
+.phone-field--error {
+    border-bottom-color: var(--color-error);
+}
+
+.phone-prefix {
+    font-size: 22px;
+    font-weight: 600;
+    color: #8A9486;
+}
+
+.phone-input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 23px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: #111511;
+}
+
+.phone-input::placeholder {
+    color: #A9B4A6;
+    font-weight: 500;
+}
+
+.login-hint {
+    min-height: 22px;
+    margin: 8px 0 0;
+    font-size: 13px;
+    color: #5A6557;
+}
+
+.login-hint--error {
+    color: var(--color-error);
+}
+
+.login-hint--ok {
+    color: var(--color-primary-dark);
+}
+
+.otp-cells {
+    display: flex;
+    gap: 10px;
+    margin-top: 26px;
+}
+
+.otp-cell {
+    flex: 1;
+    width: 0;
+    height: 64px;
+    border-radius: 12px;
+    text-align: center;
+    background: #FFFFFF;
+    outline: none;
+    font-family: inherit;
+    font-size: 28px;
+    font-weight: 700;
+    color: #111511;
+    caret-color: #111511;
+    border: 2px solid #D9E4CE;
+    box-sizing: border-box;
+}
+
+.otp-cell--active {
+    border-width: 2.5px;
+    border-color: #E3B322;
+}
+
+.otp-cell--filled {
+    border-width: 2.5px;
+    border-color: var(--color-primary-dark);
+}
+
+.otp-cell--error {
+    border-width: 2.5px;
+    border-color: var(--color-error);
+}
+
+.otp-status {
+    min-height: 22px;
+    margin-top: 16px;
+    font-size: 14px;
+    align-self: flex-start;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+    color: #5A6557;
+    text-align: left;
+}
+
+.otp-status--error {
+    color: var(--color-error);
+}
+
+.otp-status--ok {
+    color: var(--color-primary-dark);
+}
+
+.otp-status--action {
+    color: var(--color-primary-dark);
+    cursor: pointer;
+}
+
+.login-spacer {
+    flex: 1;
+}
+
+.login-submit-btn {
+    height: 54px;
+    flex: none;
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    background: #F1EBD2;
+    color: #6E6647;
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: not-allowed;
+}
+
+.login-submit-btn--ready {
+    background: #E3B322;
+    color: #2A1F00;
+    cursor: pointer;
+}
+
+/* Shared by LoginPage and OtpPage — no desktop treatment before, same
+   "narrow mobile column in a huge empty viewport" pattern as everything
+   else in the pre-login flow. */
+@media (min-width: 900px) {
+    .login-shell {
+        max-width: 440px;
+        padding-top: 32px;
+    }
+
+    .login-brand img {
+        width: 68px;
+        height: 68px;
+    }
+
+    .login-title {
+        font-size: 30px;
+    }
+
+    .login-subtitle {
+        font-size: 16px;
+    }
+
+    .phone-input {
+        font-size: 26px;
+    }
+
+    .otp-cell {
+        height: 72px;
+        font-size: 32px;
+    }
+
+    .login-submit-btn {
+        height: 58px;
+        font-size: 19px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .login-shell {
+        max-width: 500px;
+    }
+
+    .login-title {
+        font-size: 34px;
+    }
+
+    .otp-cell {
+        height: 78px;
+        font-size: 34px;
+    }
+}
