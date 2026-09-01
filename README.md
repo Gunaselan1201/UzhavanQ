@@ -73,16 +73,6 @@ Procurement centre operations remain largely manual and paper-based today. This 
 - Daily, per-centre, per-produce sequential token numbering (e.g. O01, T02), also race-condition-safe
 - 79+ automated tests (backend unit/integration/concurrency/security, frontend unit, E2E), all passing
 
-## 📸 Screenshots
-
-*Add real screenshots to `docs/screenshots/` and reference them here, e.g.:*
-```
-![Homepage](docs/screenshots/homepage.png)
-![Booking flow](docs/screenshots/booking-flow.png)
-![Token card](docs/screenshots/token-card.png)
-![Admin dashboard](docs/screenshots/admin-dashboard.png)
-```
-
 ## 🛠️ Tech stack
 
 | Layer | Tech |
