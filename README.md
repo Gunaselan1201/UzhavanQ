@@ -10,7 +10,7 @@ Real-time slot booking & queue management for government produce procurement cen
 
 ## 🔗 Live Demo
 
-- Frontend: https://uzhavanq.vercel.app
+- Frontend: https://uzhavanq.vercel.app/
 - Backend API: https://uzhavanq.onrender.com
 - Admin panel: https://uzhavanq.vercel.app/admin/login
 
