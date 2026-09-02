@@ -35,12 +35,20 @@ This is a national-ministry problem statement — it doesn't mandate a specific 
 
 ## ❓ Does this already exist?
 
-Not as a dedicated system, anywhere. Research turned up:
-- **NAFED / NCCF** — Aadhaar-linked farmer *registration* portals, no slot booking or queue management
-- **Mahabhumi (Maharashtra)** — land/farmer identity verification, unrelated to procurement queueing
-- **SBI DigiGov** — a payment settlement layer NAFED/NCCF use, not a farmer-facing booking tool
+Not quite — but it's closer than I initially assumed, and worth being 
+precise about. Research turned up:
 
-Procurement centre operations remain largely manual and paper-based today. This project is a working prototype addressing that specific, unaddressed gap.
+- **TNCSC Paddy Procurement (Tamil Nadu)** — a live system since 2023: OTP login, nearest-centre selection, and an online token with SMS date notification. The closest existing system to this project.
+  
+- **West Bengal's Farmer Self Scheduling** — a similar paddy procurement scheduling portal.
+  
+- **Punjab's mandi e-token system** — centralized token issuance that farmers have publicly reported causing mismatches (tokens issued for the wrong purchase centre) due to lack of per-centre scoping.
+  
+- **NAFED / NCCF** — Aadhaar-linked registration portals, no slot booking.
+
+     What none of these appear to offer: a **live, visual slot-capacity picker** (available/almost-full/full) rather than a simple queued token list, **race-condition-safe concurrent booking** (Punjab's reported token mismatches are a real-world example of what happens without this), or **real-time delay/postponement notifications** pushed back to the farmer when a centre's schedule changes.
+
+     This project is a prototype exploring that gap — closer in spirit to these existing government systems than a from-scratch idea, but built around real-time capacity visibility and concurrency-safety as the core differentiators.
 
 ## ⚙️ What it does
 
