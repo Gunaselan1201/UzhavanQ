@@ -33,17 +33,6 @@ Centre: Namakkal - Co operative
 
 This is a national-ministry problem statement — it doesn't mandate a specific state.
 
-## 🗺️ Why Tamil Nadu, not Maharashtra
-
-During early research, the closest existing government tooling for this space was Maharashtra's Mahabhumi portal — used for farmer land-record verification, not slot booking or queue management. No state currently runs a dedicated real-time procurement slot-booking app; the closest adjacent systems are registration portals (NAFED, NCCF) and payment-settlement rails, none of which solve the actual queueing/congestion problem this PS describes.
-
-I localized the working prototype to Tamil Nadu — my home state — instead of Maharashtra, for two practical reasons:
-
-1. **Authentic local data.** Using real Namakkal-district landmarks (Tiruchengode road, Mohanur, Namakkal Co-operative centre) instead of generic placeholder locations made the demo feel like a real deployable system rather than a templated mockup.
-2. **Bilingual requirement fit.** The problem statement calls for farmer-facing notifications and an accessible interface — supporting Tamil natively (alongside English) was a natural, authentic way to demonstrate that requirement, since it's a language I can verify and test accurately myself, rather than guessing at correctness in a language I don't speak.
-
-The architecture itself is state-agnostic — the centre list, language set, and branding are all data-driven, so this could be reconfigured for any state's procurement centres without touching the core logic.
-
 ## ❓ Does this already exist?
 
 Not as a dedicated system, anywhere. Research turned up:
